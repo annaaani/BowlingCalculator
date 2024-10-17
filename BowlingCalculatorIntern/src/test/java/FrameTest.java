@@ -26,12 +26,12 @@ class FrameTest {
 
     @Test
     void scoreToString() {
-        assertEquals("3 4", new Frame(3, 4).toString());
+        assertEquals("3  4", new Frame(3, 4).toString());
     }
 
     @Test
     void spareToString() {
-        assertEquals("9 /", new Frame(9, 1).toString());
+        assertEquals("9  /", new Frame(9, 1).toString());
     }
 
     @Test

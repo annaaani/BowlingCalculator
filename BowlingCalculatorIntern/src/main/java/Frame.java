@@ -60,11 +60,11 @@ public class Frame {
     public String toString() {
         if (frameIsComplete()) {
             if (isSpare()) {
-                return firstRoll + " /";
+                return firstRoll + "  /";
             }
             if (isStrike()) {
                 return "X  -";
-            }return firstRoll + " " + secondRoll;
+            }return firstRoll + "  " + secondRoll;
         }return firstRoll + " ";
 
 }
