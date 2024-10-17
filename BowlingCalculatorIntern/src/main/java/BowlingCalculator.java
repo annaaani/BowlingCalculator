@@ -23,7 +23,6 @@ public class BowlingCalculator {
             }
         }
     }
-
 //    todo: siin pooleli. fullGame test tootab, teised terve array omad mitte
     public int score() {
         int score = 0;
