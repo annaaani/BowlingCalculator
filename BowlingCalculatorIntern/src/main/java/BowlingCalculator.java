@@ -8,7 +8,7 @@ public class BowlingCalculator {
     List<Integer> frameScores = new ArrayList<>();
 
     public void addRoll(int pins) {
-        if (frames.isEmpty() || frames.getLast().frameIsComplete()) {
+        if (frames.isEmpty() || frames.get(frames.size() - 1).frameIsComplete()) {
             Frame frame = new Frame(pins);
 
             if (frame.isStrike()) {
@@ -16,7 +16,7 @@ public class BowlingCalculator {
             }
             frames.add(frame);
         } else {
-            frames.getLast().setSecondRoll(pins);
+            frames.get(frames.size() - 1).setSecondRoll(pins);
         }
     }
 

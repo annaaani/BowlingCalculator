@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -91,6 +93,31 @@ class BowlingCalculatorTest {
             calc.addRoll(10);
         }
         assertEquals(300, calc.score());
+    }
+
+//    @Test
+//    void getResults() {
+//        addRolls(8, 2, 5, 4, 9, 0, 10, 10, 5, 5, 5, 3, 6, 3, 9, 1, 9, 0);
+//        assertEquals("|8  /|5  4|9  -|X  -|X  -|5  /|5  3|6  3|9  /|9  -| \n" +
+//                              "|  15|  24|  33|  58|  78|  93| 101| 110| 129| 183|", calc.getResults());
+//    }
+
+    @Test
+    void testGetResults() {
+        ArrayList<Integer> rolls = new ArrayList<>(
+                Arrays.asList(8, 2, 5, 4, 9, 0, 10, 10, 5, 5, 5, 3, 6, 3, 9, 1, 9, 0));
+        for (Integer roll : rolls) {
+            calc.addRoll(roll);
+        }
+        calc.score();
+        String expected = "|8  /|5  4|9  0|X  -|X  -|5  /|5  3|6  3|9  /|9  0| \n" +
+                          "|  15|  24|  33|  58|  78|  93| 101| 110| 129| 138|";
+        assertEquals(expected, calc.getResults());
+    }
+
+    @Test
+    void addSpaces() {
+        assertEquals("   ", calc.addSpaces(1));
     }
 
     private void addRolls(int... examplePins) {

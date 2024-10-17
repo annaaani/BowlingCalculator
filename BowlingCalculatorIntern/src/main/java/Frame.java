@@ -65,7 +65,7 @@ public class Frame {
             if (isStrike()) {
                 return "X  -";
             }return firstRoll + "  " + secondRoll;
-        }return firstRoll + " ";
+        }return firstRoll + "   ";
 
 }
 
