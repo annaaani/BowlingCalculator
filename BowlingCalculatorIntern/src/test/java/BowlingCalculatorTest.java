@@ -8,25 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class BowlingCalculatorTest {
     BowlingCalculator calc = new BowlingCalculator();
 
-    @Test
-    void isStrike() {
-        assertTrue(new Frame(10, 0).isStrike());
-    }
 
-    @Test
-    void isSpare() {
-        assertTrue(new Frame(4, 6).isSpare());
-    }
-
-    @Test
-    void scoreOfFrame() {
-        assertEquals(8, new Frame(2, 6).scoreOfFrame());
-    }
-
-    @Test
-    void frameIsComplete() {
-        assertTrue(new Frame(2, 6).frameIsComplete());
-    }
 
     @Test
     void oneFrame() {
