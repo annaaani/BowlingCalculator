@@ -7,7 +7,6 @@ public class BowlingCalculator {
     List<Frame> frames = new ArrayList<>();
     List<Integer> frameScores = new ArrayList<>();
 
-
     public void addRoll(int pins) {
         if (frames.isEmpty() || frames.getLast().frameIsComplete()) {
             Frame frame = new Frame(pins);
@@ -61,9 +60,7 @@ public class BowlingCalculator {
             return nextFrame.getFirstRoll();
         }
         return 0;
-
     }
-
 
     public String getResults() {
 
@@ -72,7 +69,6 @@ public class BowlingCalculator {
         String rollsToString = "";
         String scoreToString = "";
         for (int i = 0; i <= LAST_FRAME; i++) {
-
             Frame frame = frames.get(i);
             Integer frameScore = frameScores.get(i);
 
