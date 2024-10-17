@@ -2,24 +2,18 @@ import java.util.Objects;
 
 public class Frame {
     int firstRoll;
-    int secondRoll;
+    Integer secondRoll = -1;
 
-    // TODO: teil pole vaja tühja Frame-i
-    public Frame() {
-    }
-
-//    TODO: selline meetod, et sisse tuleb ainult firstRoll, sest teine tuleb jargi
     public Frame(int firstRoll, int secondRoll) {
         this.firstRoll = firstRoll;
         this.secondRoll = secondRoll;
     }
+    public Frame(int firstRoll) {
+        this.firstRoll = firstRoll;
+    }
 
     public int getFirstRoll() {
         return firstRoll;
-    }
-
-    public void setFirstRoll(int firstRoll) {
-        this.firstRoll = firstRoll;
     }
 
     public int getSecondRoll() {
@@ -30,24 +24,23 @@ public class Frame {
         this.secondRoll = secondRoll;
     }
 
-    public boolean hasSecondRoll() {
-        return secondRoll > 0 || isStrike();
-    }
+    public int scoreOfFrame() {
 
-    public int scoreOfFrame(int firstRoll, int secondRoll) {
+        if (secondRoll == -1) {
+            return firstRoll;
+        }
         return firstRoll + secondRoll;
     }
 
-    public boolean isSpare() {
-        return firstRoll + secondRoll == 10 && firstRoll != 10;
-    }
+    public boolean isSpare() {return firstRoll + secondRoll == 10 && firstRoll != 10;}
 
     public boolean isStrike() {
         return firstRoll == 10;
     }
 
     public boolean frameIsComplete() {
-        return isStrike() || isSpare() || (firstRoll > 0 && secondRoll > 0);
+
+        return isStrike() || isSpare() || secondRoll != -1;
     }
 
     @Override

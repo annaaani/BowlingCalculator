@@ -20,22 +20,12 @@ class BowlingCalculatorTest {
 
     @Test
     void scoreOfFrame() {
-        assertEquals(8, new Frame(2, 6).scoreOfFrame(2, 6));
+        assertEquals(8, new Frame(2, 6).scoreOfFrame());
     }
 
     @Test
     void frameIsComplete() {
         assertTrue(new Frame(2, 6).frameIsComplete());
-    }
-
-    @Test
-    void hasSecondRoll() {
-        assertTrue(new Frame(2, 6).hasSecondRoll());
-    }
-
-    @Test
-    void hasSecondRollStrike() {
-        assertTrue(new Frame(10, 0).hasSecondRoll());
     }
 
     @Test
@@ -56,7 +46,7 @@ class BowlingCalculatorTest {
     void oneRoll() {
         addRolls(9);
         assertEquals(9, calc.score());
-//        assertEquals(9, calc.score()); // TODO: fix bug, liidab juurde (tulemus 18), ilmselt int score = 0; eemaldamisega saab lahendada?
+        assertEquals(9, calc.score());
     }
 
     @Test
@@ -115,7 +105,7 @@ class BowlingCalculatorTest {
 
     @Test
     void fullGame() {
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i <= 11; i++) {
             calc.addRoll(10);
         }
         assertEquals(300, calc.score());
