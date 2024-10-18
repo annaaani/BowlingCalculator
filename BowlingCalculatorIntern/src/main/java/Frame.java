@@ -2,12 +2,13 @@ import java.util.Objects;
 
 public class Frame {
     int firstRoll;
-    Integer secondRoll = -1;
+    int secondRoll = -1;
 
     public Frame(int firstRoll, int secondRoll) {
-        this.firstRoll = firstRoll;
+        this(firstRoll);
         this.secondRoll = secondRoll;
     }
+
     public Frame(int firstRoll) {
         this.firstRoll = firstRoll;
     }
@@ -25,7 +26,6 @@ public class Frame {
     }
 
     public int scoreOfFrame() {
-
         if (secondRoll == -1) {
             return firstRoll;
         }
@@ -39,7 +39,6 @@ public class Frame {
     }
 
     public boolean frameIsComplete() {
-
         return isStrike() || isSpare() || secondRoll != -1;
     }
 
@@ -56,7 +55,7 @@ public class Frame {
         return Objects.hash(firstRoll, secondRoll);
     }
 
-@Override
+    @Override
     public String toString() {
         if (frameIsComplete()) {
             if (isSpare()) {
@@ -64,11 +63,9 @@ public class Frame {
             }
             if (isStrike()) {
                 return "X  -";
-            }return firstRoll + "  " + secondRoll;
-        }return firstRoll + "";
-
-}
-
-
-
+            }
+            return firstRoll + "  " + secondRoll;
+        }
+        return Integer.toString(firstRoll);
+    }
 }

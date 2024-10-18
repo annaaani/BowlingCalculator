@@ -3,27 +3,39 @@ import java.util.List;
 
 public class BowlingCalculator {
 
-    private static final int LAST_FRAME = 9;
+    private static final int LAST_FRAME = 12;
     List<Frame> frames = new ArrayList<>();
     List<Integer> frameScores = new ArrayList<>();
 
     public void addRoll(int pins) {
-        if (frames.isEmpty() || frames.getLast().frameIsComplete()) {
-            Frame frame = new Frame(pins);
-
-            if (frame.isStrike()) {
-                frame.setSecondRoll(0);
+        if (frames.size() <= lastFrameNumber()) {
+            if (frames.isEmpty() || frames.getLast().frameIsComplete()) {
+                Frame frame = new Frame(pins);
+                if (frame.isStrike()) {
+                    frame.setSecondRoll(0);
+                }
+                frames.add(frame);
+            } else {
+                frames.getLast().setSecondRoll(pins);
             }
-            frames.add(frame);
-        } else {
-            frames.getLast().setSecondRoll(pins);
         }
     }
 
-    public int score() {
+    public int lastFrameNumber() {
+        int lastFrame = 10;
+        if (frames.size() == 10 && (frames.get(9).isSpare() || frames.get(9).isStrike())) {
+            lastFrame++;
+        }
+        if (frames.size() == 11 && frames.get(10).isStrike()) {
+            lastFrame++;
+        }
+        return lastFrame;
+    }
+
+    public int score() { // TODO: should be immutable, no side-effects
         int totalScore = 0;
 
-        for (int i = 0; i <= LAST_FRAME; i++) {
+        for (int i = 0; i < lastFrameNumber(); i++) {
             totalScore += frames.get(i).scoreOfFrame();
             if (i == frames.size() - 1) {
                 frameScores.add(totalScore);
@@ -46,7 +58,7 @@ public class BowlingCalculator {
             strikeBonus += nextFrame.scoreOfFrame();
             if (nextFrame.isStrike() && frames.size() > i + 2) {
                 strikeBonus += frames.get(i + 2).getFirstRoll();
-                if (i == LAST_FRAME) strikeBonus += nextFrame.getSecondRoll();
+                if (i == lastFrameNumber()) strikeBonus += nextFrame.getSecondRoll();
             }
         }
         return strikeBonus;
@@ -62,15 +74,18 @@ public class BowlingCalculator {
         return 0;
     }
 
-    public String getResults() {
-
-        String rollsToString = "";
-        String scoreToString = "";
+    @Override
+    public String toString() {
+        var rollsToString = new StringBuilder();
+        var scoreToString = new StringBuilder();
+        var combined = new StringBuilder();
 
         for (int i = 0; i <= LAST_FRAME; i++) {
 
             if (i == frames.size()) {
-                return rollsToString + "   | \n" + scoreToString + "|";
+                return (combined.append(rollsToString).append("   | \n")
+                        .append(scoreToString)
+                        .append("|").toString());
             }
 
             Frame frame = frames.get(i);
@@ -80,24 +95,37 @@ public class BowlingCalculator {
                 if (frame.isStrike()) {
                     rollsToString = getStrikeBonus(rollsToString, i);
                 } else if (frame.isSpare()) {
-                    rollsToString += "|" + frame + "  " + frames.get(i + 1);
+                    rollsToString.append("|")
+                            .append(frame)
+                            .append("  ")
+                            .append(frames.get(i + 1));
                 }
-                scoreToString += "|" + addSpaces(String.valueOf(frameScore).length()) + "   " + frameScore;
+                scoreToString.append("|")
+                        .append(addSpaces(String.valueOf(frameScore).length()))
+                        .append("   ")
+                        .append(frameScore);
             } else {
-                rollsToString += "|" + frame;
-                scoreToString += "|" + addSpaces(String.valueOf(frameScore).length()) + frameScore;
+                rollsToString.append("|")
+                        .append(frame);
+                scoreToString.append("|")
+                        .append(addSpaces(String.valueOf(frameScore).length()))
+                        .append(frameScore);
             }
         }
-        return rollsToString + "| \n" + scoreToString + "|";
+        return (combined.append(rollsToString).append("| \n")
+                .append(scoreToString)
+                .append("|").toString());
     }
 
-    private String getStrikeBonus(String rollsToString, int i) {
+    private StringBuilder getStrikeBonus(StringBuilder rollsToString, int i) {
         Frame frame = frames.get(i);
         Frame nextFrame = frames.get(i + 1);
-        rollsToString += "|" + String.valueOf(frame).replace("X  -", "X")
-                + "  " + String.valueOf(nextFrame).replace("X  -", "X");
+        rollsToString.append("|")
+                .append(String.valueOf(frame).replace("X  -", "X"))
+                .append("  ")
+                .append(String.valueOf(nextFrame).replace("X  -", "X"));
         if (nextFrame.isStrike()) {
-            rollsToString += String.valueOf(frames.get(i + 2)).replace("X  -", "  X");
+            rollsToString.append(String.valueOf(frames.get(i + 2)).replace("X  -", "  X"));
         }
         return rollsToString;
     }
@@ -108,12 +136,12 @@ public class BowlingCalculator {
     }
 
     public static void main(String[] args) {
-        BowlingCalculator calculator = new BowlingCalculator();
+        var calculator = new BowlingCalculator();
         Integer[] rolls = {8, 2, 5, 4, 9, 0, 10, 10, 5, 5, 5, 3, 6, 3, 9, 1, 9, 0};
         for (Integer roll : rolls) {
             calculator.addRoll(roll);
         }
         calculator.score();
-        System.out.println(calculator.getResults());
+        System.out.println(calculator);
     }
 }
