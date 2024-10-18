@@ -64,16 +64,35 @@ public class BowlingCalculator {
 
     public String getResults() {
 
-        //todo: last frame last roll is strike or spare!!
-
         String rollsToString = "";
         String scoreToString = "";
+
         for (int i = 0; i <= LAST_FRAME; i++) {
+
+            if(i == frames.size()){
+                return rollsToString + "   | \n" + scoreToString + "|";
+            }
+
             Frame frame = frames.get(i);
             Integer frameScore = frameScores.get(i);
 
-            rollsToString += "|" + frame;
-            scoreToString += "|" + addSpaces(String.valueOf(frameScore).length()) + frameScore;
+            if(i == LAST_FRAME && (frame.isStrike() || frame.isSpare())) {
+                Frame nextFrame = frames.get(i + 1);
+                if(frame.isStrike()) {
+                    rollsToString += "|" + String.valueOf(frame).replace("X  -","X")
+                            +"  " + String.valueOf(nextFrame).replace("X  -","X");
+                    if(nextFrame.isStrike()) {
+                        rollsToString += String.valueOf(frames.get(i + 2)).replace("X  -","  X");
+                    }
+                }else{
+                    rollsToString += "|" + frame +"  " + nextFrame;
+                }
+
+                scoreToString += "|" + addSpaces(String.valueOf(frameScore).length()) + "   " + frameScore;
+            } else {
+                rollsToString += "|" + frame;
+                scoreToString += "|" + addSpaces(String.valueOf(frameScore).length()) + frameScore;
+            }
         }
         return rollsToString + "| \n" + scoreToString + "|";
     }
@@ -85,7 +104,7 @@ public class BowlingCalculator {
 
     public static void main(String[] args) {
         BowlingCalculator calculator = new BowlingCalculator();
-        Integer[] rolls = {8, 2, 5, 4, 9, 0, 10, 10, 5, 5, 5, 3, 6, 3, 9, 1, 9, 1, 1};
+        Integer[] rolls = {8, 2, 5, 4, 9, 0, 10, 10, 5, 5, 5, 3, 6, 3, 8, 1, 10, 1,2};
         for (Integer roll : rolls) {
             calculator.addRoll(roll);
         }
