@@ -69,25 +69,19 @@ public class BowlingCalculator {
 
         for (int i = 0; i <= LAST_FRAME; i++) {
 
-            if(i == frames.size()){
+            if (i == frames.size()) {
                 return rollsToString + "   | \n" + scoreToString + "|";
             }
 
             Frame frame = frames.get(i);
             Integer frameScore = frameScores.get(i);
 
-            if(i == LAST_FRAME && (frame.isStrike() || frame.isSpare())) {
-                Frame nextFrame = frames.get(i + 1);
-                if(frame.isStrike()) {
-                    rollsToString += "|" + String.valueOf(frame).replace("X  -","X")
-                            +"  " + String.valueOf(nextFrame).replace("X  -","X");
-                    if(nextFrame.isStrike()) {
-                        rollsToString += String.valueOf(frames.get(i + 2)).replace("X  -","  X");
-                    }
-                }else{
-                    rollsToString += "|" + frame +"  " + nextFrame;
+            if (i == LAST_FRAME && (frame.isStrike() || frame.isSpare())) {
+                if (frame.isStrike()) {
+                    rollsToString = getStrikeBonus(rollsToString, i);
+                } else if (frame.isSpare()) {
+                    rollsToString += "|" + frame + "  " + frames.get(i + 1);
                 }
-
                 scoreToString += "|" + addSpaces(String.valueOf(frameScore).length()) + "   " + frameScore;
             } else {
                 rollsToString += "|" + frame;
@@ -97,6 +91,17 @@ public class BowlingCalculator {
         return rollsToString + "| \n" + scoreToString + "|";
     }
 
+    private String getStrikeBonus(String rollsToString, int i) {
+        Frame frame = frames.get(i);
+        Frame nextFrame = frames.get(i + 1);
+        rollsToString += "|" + String.valueOf(frame).replace("X  -", "X")
+                + "  " + String.valueOf(nextFrame).replace("X  -", "X");
+        if (nextFrame.isStrike()) {
+            rollsToString += String.valueOf(frames.get(i + 2)).replace("X  -", "  X");
+        }
+        return rollsToString;
+    }
+
     public String addSpaces(int integerLength) {
         int numberOfSpaces = 4 - integerLength;
         return " ".repeat(Math.max(0, numberOfSpaces));
@@ -104,7 +109,7 @@ public class BowlingCalculator {
 
     public static void main(String[] args) {
         BowlingCalculator calculator = new BowlingCalculator();
-        Integer[] rolls = {8, 2, 5, 4, 9, 0, 10, 10, 5, 5, 5, 3, 6, 3, 8, 1, 10, 1,2};
+        Integer[] rolls = {8, 2, 5, 4, 9, 0, 10, 10, 5, 5, 5, 3, 6, 3, 9, 1, 9, 0};
         for (Integer roll : rolls) {
             calculator.addRoll(roll);
         }
