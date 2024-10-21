@@ -3,6 +3,7 @@ import java.util.Objects;
 public class Frame {
     int firstRoll;
     int secondRoll = -1;
+    int frameScore;
 
     public Frame(int firstRoll, int secondRoll) {
         this(firstRoll);
@@ -21,8 +22,18 @@ public class Frame {
         return secondRoll;
     }
 
+    public int getFrameScore() {return frameScore;}
+
     public void setSecondRoll(int secondRoll) {
         this.secondRoll = secondRoll;
+    }
+
+    public void setFrameScore() {
+        this.frameScore = scoreOfFrame();
+    }
+
+    public void setFrameScore(int bonus) {
+        this.frameScore = (frameScore + bonus);
     }
 
     public int scoreOfFrame() {

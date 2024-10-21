@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="BowlingCalculatorTest" tests="18" skipped="0" failures="0" errors="0" timestamp="2024-10-21T07:14:27" hostname="vali-it-4" time="0.053">
+<testsuite name="BowlingCalculatorTest" tests="19" skipped="0" failures="0" errors="0" timestamp="2024-10-21T08:08:04" hostname="vali-it-4" time="0.056">
   <properties/>
-  <testcase name="doubleStrikeEnd()" classname="BowlingCalculatorTest" time="0.012"/>
+  <testcase name="doubleStrikeEnd()" classname="BowlingCalculatorTest" time="0.014"/>
   <testcase name="oneRoll()" classname="BowlingCalculatorTest" time="0.001"/>
-  <testcase name="multipleRolls()" classname="BowlingCalculatorTest" time="0.002"/>
+  <testcase name="getMoreResults()" classname="BowlingCalculatorTest" time="0.008"/>
+  <testcase name="multipleRolls()" classname="BowlingCalculatorTest" time="0.001"/>
   <testcase name="multipleSpare()" classname="BowlingCalculatorTest" time="0.001"/>
-  <testcase name="regularEnd()" classname="BowlingCalculatorTest" time="0.001"/>
-  <testcase name="addSpaces()" classname="BowlingCalculatorTest" time="0.002"/>
+  <testcase name="regularEnd()" classname="BowlingCalculatorTest" time="0.0"/>
+  <testcase name="addSpaces()" classname="BowlingCalculatorTest" time="0.001"/>
   <testcase name="oneStrikeEnd()" classname="BowlingCalculatorTest" time="0.001"/>
   <testcase name="multipleFrames()" classname="BowlingCalculatorTest" time="0.001"/>
   <testcase name="multipleStrike()" classname="BowlingCalculatorTest" time="0.001"/>
-  <testcase name="getResultWithDoubleStrikeEnd()" classname="BowlingCalculatorTest" time="0.007"/>
+  <testcase name="getResultWithDoubleStrikeEnd()" classname="BowlingCalculatorTest" time="0.002"/>
   <testcase name="getResultWithSpareEnd()" classname="BowlingCalculatorTest" time="0.001"/>
   <testcase name="fullGame()" classname="BowlingCalculatorTest" time="0.0"/>
   <testcase name="oneStrike()" classname="BowlingCalculatorTest" time="0.001"/>
-  <testcase name="getResultWithStrikeEnd()" classname="BowlingCalculatorTest" time="0.001"/>
-  <testcase name="oneFrame()" classname="BowlingCalculatorTest" time="0.0"/>
+  <testcase name="getResultWithStrikeEnd()" classname="BowlingCalculatorTest" time="0.0"/>
+  <testcase name="oneFrame()" classname="BowlingCalculatorTest" time="0.001"/>
   <testcase name="oneSpare()" classname="BowlingCalculatorTest" time="0.001"/>
   <testcase name="getResultsWithHalfFrame()" classname="BowlingCalculatorTest" time="0.0"/>
   <testcase name="spareEnd()" classname="BowlingCalculatorTest" time="0.001"/>
