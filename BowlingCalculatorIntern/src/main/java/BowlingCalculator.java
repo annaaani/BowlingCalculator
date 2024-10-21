@@ -20,7 +20,6 @@ public class BowlingCalculator {
             }
         }
     }
-
     public int lastFrameNumber() {
         if (frames.size() == 10 && (frames.get(9).isSpare() || frames.get(9).isStrike())) {
             lastFrame++;
