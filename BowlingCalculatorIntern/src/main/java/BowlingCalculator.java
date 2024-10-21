@@ -3,9 +3,10 @@ import java.util.List;
 
 public class BowlingCalculator {
 
-    private static final int LAST_FRAME = 12;
+    private static final int LAST_FRAME_INDEX = 9;
     List<Frame> frames = new ArrayList<>();
     List<Integer> frameScores = new ArrayList<>();
+    int lastFrame = 10;
 
     public void addRoll(int pins) {
         if (frames.size() <= lastFrameNumber()) {
@@ -22,7 +23,6 @@ public class BowlingCalculator {
     }
 
     public int lastFrameNumber() {
-        int lastFrame = 10;
         if (frames.size() == 10 && (frames.get(9).isSpare() || frames.get(9).isStrike())) {
             lastFrame++;
         }
@@ -35,7 +35,8 @@ public class BowlingCalculator {
     public int score() { // TODO: should be immutable, no side-effects
         int totalScore = 0;
 
-        for (int i = 0; i < lastFrameNumber(); i++) {
+        for (int i = 0; i <= LAST_FRAME_INDEX; i++) {
+
             totalScore += frames.get(i).scoreOfFrame();
             if (i == frames.size() - 1) {
                 frameScores.add(totalScore);
@@ -58,7 +59,7 @@ public class BowlingCalculator {
             strikeBonus += nextFrame.scoreOfFrame();
             if (nextFrame.isStrike() && frames.size() > i + 2) {
                 strikeBonus += frames.get(i + 2).getFirstRoll();
-                if (i == lastFrameNumber()) strikeBonus += nextFrame.getSecondRoll();
+                if (i == LAST_FRAME_INDEX) strikeBonus += nextFrame.getSecondRoll();
             }
         }
         return strikeBonus;
@@ -80,8 +81,7 @@ public class BowlingCalculator {
         var scoreToString = new StringBuilder();
         var combined = new StringBuilder();
 
-        for (int i = 0; i <= LAST_FRAME; i++) {
-
+        for (int i = 0; i <= LAST_FRAME_INDEX; i++) {
             if (i == frames.size()) {
                 return (combined.append(rollsToString).append("   | \n")
                         .append(scoreToString)
@@ -91,7 +91,7 @@ public class BowlingCalculator {
             Frame frame = frames.get(i);
             Integer frameScore = frameScores.get(i);
 
-            if (i == LAST_FRAME && (frame.isStrike() || frame.isSpare())) {
+            if (i == LAST_FRAME_INDEX && (frame.isStrike() || frame.isSpare())) {
                 if (frame.isStrike()) {
                     rollsToString = getStrikeBonus(rollsToString, i);
                 } else if (frame.isSpare()) {

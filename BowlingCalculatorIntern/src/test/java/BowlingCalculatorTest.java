@@ -110,27 +110,27 @@ class BowlingCalculatorTest {
         assertEquals("|8  /|5  4|9  0|X  -|X  -|5  /|5   | \n" +
                               "|  15|  24|  33|  58|  78|  93|  98|", calc.toString());
     }
-//    @Test
-//    void getResultWithStrikeEnd() {
-//        addRolls(8, 2, 5, 4, 9, 0, 10, 10, 5, 5, 5, 3, 6, 3, 8, 1, 10, 1, 2);
-//        calc.score();
-//        assertEquals("|8  /|5  4|9  0|X  -|X  -|5  /|5  3|6  3|8  1|X  1  2| \n" +
-//                "|  15|  24|  33|  58|  78|  93| 101| 110| 119|    132|", calc.toString());
-//    }
-//    @Test
-//    void getResultWithDoubleStrikeEnd() {
-//        addRolls(8, 2, 5, 4, 9, 0, 10, 10, 5, 5, 5, 3, 6, 3, 8, 1, 10, 10, 10);
-//        calc.score();
-//        assertEquals("|8  /|5  4|9  0|X  -|X  -|5  /|5  3|6  3|8  1|X  X  X| \n" +
-//                "|  15|  24|  33|  58|  78|  93| 101| 110| 119|    149|", calc.toString());
-//    }
-//    @Test
-//    void getResultWithSpareEnd() {
-//        addRolls(8, 2, 5, 4, 9, 0, 10, 10, 5, 5, 5, 3, 6, 3, 8, 1, 8, 2, 2);
-//        calc.score();
-//        assertEquals("|8  /|5  4|9  0|X  -|X  -|5  /|5  3|6  3|8  1|8  /  2| \n" +
-//                "|  15|  24|  33|  58|  78|  93| 101| 110| 119|    131|", calc.toString());
-//    }
+    @Test
+    void getResultWithStrikeEnd() {
+        addRolls(8, 2, 5, 4, 9, 0, 10, 10, 5, 5, 5, 3, 6, 3, 8, 1, 10, 1, 2);
+        calc.score();
+        assertEquals("|8  /|5  4|9  0|X  -|X  -|5  /|5  3|6  3|8  1|X  1  2| \n" +
+                "|  15|  24|  33|  58|  78|  93| 101| 110| 119|    132|", calc.toString());
+    }
+    @Test
+    void getResultWithDoubleStrikeEnd() {
+        addRolls(8, 2, 5, 4, 9, 0, 10, 10, 5, 5, 5, 3, 6, 3, 8, 1, 10, 10, 10);
+        calc.score();
+        assertEquals("|8  /|5  4|9  0|X  -|X  -|5  /|5  3|6  3|8  1|X  X  X| \n" +
+                "|  15|  24|  33|  58|  78|  93| 101| 110| 119|    149|", calc.toString());
+    }
+    @Test
+    void getResultWithSpareEnd() {
+        addRolls(8, 2, 5, 4, 9, 0, 10, 10, 5, 5, 5, 3, 6, 3, 8, 1, 8, 2, 2);
+        calc.score();
+        assertEquals("|8  /|5  4|9  0|X  -|X  -|5  /|5  3|6  3|8  1|8  /  2| \n" +
+                "|  15|  24|  33|  58|  78|  93| 101| 110| 119|    131|", calc.toString());
+    }
 
     @Test
     void addSpaces() {
