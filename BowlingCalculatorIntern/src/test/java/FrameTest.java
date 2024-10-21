@@ -34,7 +34,6 @@ class FrameTest {
         assertEquals("3", new Frame(3).toString());
     }
 
-
     @Test
     void spareToString() {
         assertEquals("9  /", new Frame(9, 1).toString());
